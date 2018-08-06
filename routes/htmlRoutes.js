@@ -17,12 +17,12 @@ module.exports = function(app) {
       l("dbEx coming");
       l(dbExamples);
       res.render("index", {
-        msg: "Welcome!",
+        msg: "Welcome boot camp students!",
         examples: dbExamples
       });
     });
   });
-
+  
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
     db.idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
