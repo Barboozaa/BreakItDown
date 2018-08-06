@@ -9,9 +9,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     rating: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER, 
       allowNull: false
     }
   });
+  return Idea;
 };
 
