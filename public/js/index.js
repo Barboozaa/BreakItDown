@@ -71,7 +71,7 @@ var handleFormSubmit = function(event) {
   };
 
   if (!(example.title && example.description)) {
-    alert("You must enter an example text and desscription!");
+    alert("You must enter an example text and description!");
     return;
   }
 

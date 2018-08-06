@@ -3,17 +3,8 @@ l = console.log; //simpler logging
 
 module.exports = function (app) {
   // Load index page
-  app.get("/", function (req, res) {
-    db.idea.findAll({}).then(function (dbExamples) {
-      if (dbExamples.length == 0 || dbExamples == null) {
-        dbExamples = {
-          id: 1,
-          title: "foo",
-          descrition: "bar",
-          rating: 1
-        };
-      };
-      l(dbExamples[0]);
+  app.get("/", function(req, res) {
+    db.idea.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Rise and shine, boot campers",
         examples: dbExamples
