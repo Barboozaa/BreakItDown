@@ -21,6 +21,12 @@ module.exports = function (app) {
     });
   });
 
+  // Load submit page
+  app.get("/submit", function(req, res) {
+      res.render("submitIdeas");
+ });
+
+
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
     res.render("404");
