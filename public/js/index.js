@@ -65,8 +65,9 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+    title: $exampleText.val().trim(),
+    description: $exampleDescription.val().trim(),
+    rating: 3
   };
 
   if (!(example.title && example.description)) {
