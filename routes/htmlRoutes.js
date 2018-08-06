@@ -33,7 +33,7 @@ module.exports = function(app) {
   });
 
   // Load submit page
-  app.get("/submitIdeas", function(req, res) {
+  app.get("/submit", function(req, res) {
       res.render("submitIdeas");
  });
 
