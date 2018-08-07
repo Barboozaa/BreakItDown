@@ -1,4 +1,4 @@
-INSERT INTO ideas (title, descriptions, rating)  VALUES
+INSERT INTO ideas (title, description, rating)  VALUES
 ("Social Engineer", "Census, apis that gov / un has, connect ppl w/ resources in area. homelessness mapping to shelters. Statistics to resources.", 5),
 ("Word Wars", "Typing practice game", 5),
 ("Pinder", "Tinder for pet adoptions", 5),
