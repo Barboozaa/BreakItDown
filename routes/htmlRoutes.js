@@ -4,7 +4,7 @@ var passport = require("passport");
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.idea.findAll({}).then(function(dbExamples) {
@@ -16,8 +16,8 @@ module.exports = function (app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function (req, res) {
-    db.idea.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
+  app.get("/example/:id", function(req, res) {
+    db.idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
       res.render("example", {
         example: dbExample
       });
@@ -26,9 +26,8 @@ module.exports = function (app) {
 
   // Load submit page
   app.get("/submit", function(req, res) {
-      res.render("submitIdeas");
- });
-
+    res.render("submitIdeas");
+  });
 
  app.get("/login", function(req, res) {
   res.render("login");
@@ -65,7 +64,7 @@ app.get('/auth/google',
 
 
   // Render 404 page for any unmatched routes
-  app.get("*", function (req, res) {
+  app.get("*", function(req, res) {
     res.render("404");
   });
 };
