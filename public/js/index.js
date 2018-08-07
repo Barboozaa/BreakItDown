@@ -98,3 +98,46 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+
+//paypal
+
+paypal.Button.render({
+
+  env: 'sandbox', // sandbox | production
+
+  // PayPal Client IDs - replace with your own
+  // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+  client: {
+      sandbox:    'AR9Q_bcRdnunghh10G1xHJU9utET45CTLjtS-Pp4Zut2THxAgm9zYKJBfM9zfYDD6SGhuMDFCrW4XDsg',
+      production: '<insert production client id>'
+  },
+
+  // Show the buyer a 'Pay Now' button in the checkout flow
+  commit: true,
+
+  // payment() is called when the button is clicked
+  payment: function(data, actions) {
+
+      // Make a call to the REST api to create the payment
+      return actions.payment.create({
+          payment: {
+              transactions: [
+                  {
+                      amount: { total: '0.01', currency: 'USD' }
+                  }
+              ]
+          }
+      });
+  },
+
+  // onAuthorize() is called when the buyer approves the payment
+  onAuthorize: function(data, actions) {
+
+      // Make a call to the REST api to execute the payment
+      return actions.payment.execute().then(function() {
+          window.alert('Payment Complete!');
+      });
+  }
+
+}, '#paypal-button-container');
