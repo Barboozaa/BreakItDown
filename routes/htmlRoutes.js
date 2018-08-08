@@ -1,11 +1,25 @@
 var db = require("../models");
 l = console.log; //simpler logging
 var passport = require("passport");
-var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-var FacebookStrategy = require("passport-facebook").Strategy;
-var path = require("path");
+var path = require("path")
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var isAuthenticated = require("../config/isAuthenticated");
 
 module.exports = function(app) {
+  app.get("/signup", function(req, res) {
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.redirect("/members");
+    }
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+  });
+  app.get("/members", isAuthenticated, function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/members.html"));
+  });
+  app.get("/memberss", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/members.html"));
+  });
   // Load index page
   app.get("/", function(req, res) {
     db.Idea.findAll({}).then(function(dbExamples) {
@@ -39,6 +53,16 @@ module.exports = function(app) {
     // res.render("signup");
     res.sendFile(path.join(__dirname, "../public/html/signup.html"));
   });
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
 
   app.get("/auth/facebook", passport.authenticate("facebook"));
 
