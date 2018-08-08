@@ -22,11 +22,8 @@ module.exports = function (app) {
         examples: dbExamples
       });
     });
-    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
-  app.get("/memberss", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/html/members.html"));
-  });
+
   // Load index page
   app.get("/", function(req, res) {
     db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
@@ -39,7 +36,7 @@ module.exports = function (app) {
 
   // Load example page and pass in an example by id
   app.get("/ideas/:id", function (req, res) {
-    db.idea.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
+    db.idea.findOne({include:[db.userstory], where: { id: req.params.id } }).then(function (dbExample) {
       res.render("example", {
         example: dbExample
       });
@@ -52,7 +49,7 @@ module.exports = function (app) {
   });
 
   app.get("/login", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/login.html"));
+    res.sendFile(path.join(__dirname, "../public/html/login.html"));
 
     // res.render("login");
   });

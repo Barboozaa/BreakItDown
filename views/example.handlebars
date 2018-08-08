@@ -1,25 +1,43 @@
 <nav class="#ffff00 yellow accent-2">
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo center">Break It Down</a>     
-      <ul class="left hide-on-med-and-down">
-        <li><a href="/">Home</a></li>
-        <li><a href="/submit">Submit</a></li>
-        <li><a href="/login">Login</a></li> 
-      </ul> 
-   </div>
-  </nav>
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo center">Break It Down</a>
+    <ul class="left hide-on-med-and-down">
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/submit">Submit</a>
+      </li>
+      <li>
+        <a href="/login">Login</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
   <div class="row">
     <div class="col-8 offset-2">
-          <h5 class="card-title">Example</h5>
-          <p>
-            <strong>ID</strong>: {{example.id}}</p>
-          <p>
-          <p>
-            <strong>Text</strong>: {{example.title}}</p>
-          <p>
-            <strong>Description:</strong> {{example.description}}</p>
-            <a href="/">← Back To Home</a>
+      <h5 class="card-title">Example</h5>
+      <p>
+        <strong>ID</strong>: {{example.id}}</p>
+      <p>
+        <p>
+          <strong>Text</strong>: {{example.title}}</p>
+        <p>
+          <strong>Description:</strong> {{example.description}}</p>
+
+        <p>
+          <strong>Technologies used: </strong> {{example.tech_used}}
+        </p>
+        <div>
+          <strong>User Stories:</strong>
+          {{#each example.userstories}}
+          <ul class="browser-default">
+            <li>{{story}}</li>
+          </ul>
+          {{/each}}
+        </div>
+        <a href="/">← Back To Home</a>
     </div>
   </div>
 </div>

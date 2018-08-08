@@ -18,3 +18,6 @@ label{
 nav{
   margin-bottom: 15px;
 }
+ul.left > li > a,a.brand-logo{
+  color:black
+}
