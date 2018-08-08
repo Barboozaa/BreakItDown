@@ -2,6 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
+        <a href="/signup">Signup/Login</a>
+        <br>
+        <a href="/members">Premium Ideas</a>
         <h1>{{msg}}</h1>
         <p>
           Need a project idea for your technology boot camp? We have built this site for you, dear friend. You are tasked with writing a project for your programming / education boot camp, and you realize, "OH NO! I'm a programming person, not an ideas human!" Fear not, we are all on the same team, and now that you have found this page, your mission is much closer to being complete. Please enjoy our free project ideas below, and consider supporting our learning and development by subscribing to our premium ideas.
@@ -12,7 +15,7 @@
           <li data-id="{{this.id}}" class="list-group-item">
             <div>
               <a href="example/{{this.id}}">{{this.title}}</a>
-              <span style="font-size:12px"> {{this.description}}</span>
+              <span style="font-size:12px"> {{this.description}} {{this.tech_used}}</span>
             </div>
           </li>
           {{/each}}
