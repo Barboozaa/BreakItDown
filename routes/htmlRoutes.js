@@ -6,8 +6,9 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var isAuthenticated = require("../config/isAuthenticated");
 
-module.exports = function(app) {
-  app.get("/signup", function(req, res) {
+
+module.exports = function (app) {
+  app.get("/signup", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
       res.redirect("/members");
@@ -21,11 +22,8 @@ module.exports = function(app) {
         examples: dbExamples
       });
     });
-    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
-  app.get("/memberss", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/html/members.html"));
-  });
+
   // Load index page
   app.get("/", function(req, res) {
     db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
@@ -37,8 +35,8 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/ideas/:id", function(req, res) {
-    db.idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+  app.get("/ideas/:id", function (req, res) {
+    db.idea.findOne({include:[db.userstory], where: { id: req.params.id } }).then(function (dbExample) {
       res.render("example", {
         example: dbExample
       });
@@ -46,64 +44,42 @@ module.exports = function(app) {
   });
 
   // Load submit page
-  app.get("/submit", function(req, res) {
+  app.get("/submit", function (req, res) {
     res.render("submitIdeas");
   });
 
-  app.get("/login", function(req, res) {
-    // res.render("login");
+  app.get("/login", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/html/login.html"));
+
+    // res.render("login");
   });
-
-  app.get("/signup", function(req, res) {
-    // res.render("signup");
-    res.sendFile(path.join(__dirname, "../public/html/signup.html"));
-  });
-
-app.get('/auth/facebook', passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
-
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 
   app.get("/auth/facebook", passport.authenticate("facebook"));
-
-  app.get(
-    "/auth/facebook/callback",
+  app.get("/auth/facebook/callback",
     passport.authenticate("facebook", {
       successRedirect: "/",
       failureRedirect: "/login"
     })
   );
 
-  app.get(
-    "/auth/google",
+  app.get("/auth/google",
     passport.authenticate("google", {
       scope: ["https://www.googleapis.com/auth/plus.login"]
     })
   );
-
-  app.get(
-    "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login" }),
-    function(req, res) {
-      res.redirect("/");
-    }
+  app.get("/auth/google/callback",
+    passport.authenticate("google", { successRedirect: "/members", failureRedirect: "/login" })
   );
 
-  app.post(
-    "/login",
+  app.post("/login",
     passport.authenticate("local", {
       successRedirect: "/",
       failureRedirect: "/login",
       failureFlash: true,
       successFlash: "Welcome!"
     }),
-    function(req, res) {
+    function (req, res) {
       // If this function gets called, authentication was successful.
       // `req.user` contains the authenticated user.
       res.redirect("/users/" + req.user.username);
@@ -111,7 +87,7 @@ app.get('/auth/google',
   );
 
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };

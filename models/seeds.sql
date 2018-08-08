@@ -57,7 +57,7 @@ INSERT INTO breakdown_db.ideas (title, description, rating) VALUES
 ,('SpaceHub','All things up in the sky, what''s happening when and what will the weather allow us see?',3)
 ,('Optimal Seller','See what items sell for online',2)
 ,('Booze Hub','Find cool bars in my area',3)
-,('Whether Weather','Find if the weather will ')
+,('Whether Weather','Find if the weather will ',3)
 ,('Medical tracking','Provider OR patient side',3)
 ,('Bitcoin','Where are bitcoin ATMs!?!',2)
 ,('Who''s your representative','Government servant finder',2)
