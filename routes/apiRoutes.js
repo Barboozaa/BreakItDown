@@ -4,7 +4,7 @@ var passport = require("passport");
 module.exports = function(app) {
   // Get all examples
   app.get("/api/ideas", function(req, res) {
-    db.idea.findAll({include: [db.userstory]}).then(function(dbExamples) {
+    db.idea.findAll({ include: [db.userstory] }).then(function(dbExamples) {
       res.json(dbExamples);
     });
   });

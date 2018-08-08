@@ -12,17 +12,17 @@ module.exports = function(app) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
+    res.sendFile(path.join(__dirname, "../public/html/signup.html"));
   });
   app.get("/members", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
   app.get("/memberss", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
   // Load index page
   app.get("/", function(req, res) {
-    db.Idea.findAll({}).then(function(dbExamples) {
+    db.idea.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Rise and shine, boot campers",
         examples: dbExamples
@@ -32,7 +32,7 @@ module.exports = function(app) {
 
   // Load example page and pass in an example by id
   app.get("/ideas/:id", function(req, res) {
-    db.Idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+    db.idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
       res.render("example", {
         example: dbExample
       });
