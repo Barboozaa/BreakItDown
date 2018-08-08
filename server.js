@@ -46,7 +46,7 @@ app.set("view engine", "handlebars");
 passport.use(new FacebookStrategy({
   clientID: "2056252867730586",
   clientSecret: "79a270dbe9e819e9ca5b6acd12560bb6",
-  callbackURL: "http://localhost:3000"
+  callbackURL: "http://localhost:3000/auth/facebook/callback"
 },
 function(accessToken, refreshToken, profile, done) {
   User.findOrCreate(function(err, user) {
@@ -59,11 +59,21 @@ function(accessToken, refreshToken, profile, done) {
 passport.use(new GoogleStrategy({
   clientID: "183206309241-cd7t2vicllej2vf7kfes24nvbqg9pha4.apps.googleusercontent.com",
   clientSecret: "foP2XosB6isL5uqiWXP30SQD",
-  callbackURL: "http://localhost:3000"
-},
+  callbackURL: "http://localhost:3000/auth/google/callback"
+}
+,
 function(accessToken, refreshToken, profile, done) {
-     User.findOrCreate({ googleId: profile.id }, function (err, user) {
-       return done(err, user);
+
+    db.User.findCreateFind({
+      where: {
+        email: profile.id,
+        googleId: profile.id,
+        password: profile.id
+      }
+    }).then(function (user) {
+         done(null, user);
+     }).catch(function (err) {
+       done(err);
      });
 }
 ));
