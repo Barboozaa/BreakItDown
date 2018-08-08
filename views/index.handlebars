@@ -1,22 +1,23 @@
+<nav class="#ffff00 yellow accent-2">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo center">Break It Down</a>     
+      <ul class="left hide-on-med-and-down">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/submit">Submit</a></li>
+        <li><a href="/login">Login</a></li> 
+      </ul> 
+   </div>
+  </nav>
 <div id="home">
   <div class="container">
     <div class="row">
-      <div class="col-8 offset-2">
-        <a href="/signup">Signup/Login</a>
-        <br>
-        <a href="/members">Premium Ideas</a>
-        <h1>{{msg}}</h1>
-        <p>
-          Need a project idea for your technology boot camp? We have built this site for you, dear friend. You are tasked with writing a project for your programming / education boot camp, and you realize, "OH NO! I'm a programming person, not an ideas human!" Fear not, we are all on the same team, and now that you have found this page, your mission is much closer to being complete. Please enjoy our free project ideas below, and consider supporting our learning and development by subscribing to our premium ideas.
-        </p>
-        <h3>Project Ideas</h3>
+      <div class="col-10 offset-1">
+        <h3 class="center-align"><i class="medium material-icons">lightbulb_outline</i>{{msg}}</h3>
+        <h5>Project Ideas</h5>
         <ul id="example-list" class="list-group">
           {{#each examples}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <div>
-              <a href="example/{{this.id}}">{{this.title}}</a>
-              <span style="font-size:12px"> {{this.description}} {{this.tech_used}}</span>
-            </div>
+            <a href="ideas/{{this.id}}">{{this.title}}</a>
           </li>
           {{/each}}
         </ul>
