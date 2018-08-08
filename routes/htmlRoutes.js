@@ -3,6 +3,7 @@ l = console.log; //simpler logging
 var passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 var FacebookStrategy = require("passport-facebook").Strategy;
+var path = require("path");
 
 module.exports = function(app) {
   // Load index page
@@ -30,7 +31,13 @@ module.exports = function(app) {
   });
 
   app.get("/login", function(req, res) {
-    res.render("login");
+    // res.render("login");
+    res.sendFile(path.join(__dirname, "../public/html/login.html"));
+  });
+
+  app.get("/signup", function(req, res) {
+    // res.render("signup");
+    res.sendFile(path.join(__dirname, "../public/html/signup.html"));
   });
 
   app.get("/auth/facebook", passport.authenticate("facebook"));
