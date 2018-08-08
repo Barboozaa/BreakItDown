@@ -3,12 +3,17 @@
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
+        <p>
+          Need a project idea for your technology boot camp? We have built this site for you, dear friend. You are tasked with writing a project for your programming / education boot camp, and you realize, "OH NO! I'm a programming person, not an ideas human!" Fear not, we are all on the same team, and now that you have found this page, your mission is much closer to being complete. Please enjoy our free project ideas below, and consider supporting our learning and development by subscribing to our premium ideas.
+        </p>
         <h3>Project Ideas</h3>
         <ul id="example-list" class="list-group">
           {{#each examples}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="ideas/{{this.id}}">{{this.title}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
+            <div>
+              <a href="example/{{this.id}}">{{this.title}}</a>
+              <span style="font-size:12px"> {{this.description}}</span>
+            </div>
           </li>
           {{/each}}
         </ul>
