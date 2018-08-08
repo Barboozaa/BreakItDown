@@ -10,22 +10,23 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
+  app.post("/api/ideas", function(req, res) {
     db.Idea.create(req.body).then(function(dbExample) {
       res.json(dbExample);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
+  app.delete("/api/ideas/:id", function(req, res) {
     db.Idea.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
       res.json(dbExample);
     });
   });
-  app.get('/api/users/me',
-  passport.authenticate('basic', { session: false }),
-  function(req, res) {
-    res.json({ id: req.user.id, username: req.user.username });
-  });
+  app.get(
+    "/api/users/me",
+    passport.authenticate("basic", { session: false }),
+    function(req, res) {
+      res.json({ id: req.user.id, username: req.user.username });
+    }
+  );
 };
-

@@ -2,11 +2,11 @@ require("dotenv").config();
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
 var session = require("express-session");
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+var FacebookStrategy = require("passport-facebook").Strategy;
 
 var db = require("./models");
 
@@ -20,7 +20,6 @@ app.use(express.static("public"));
 app.use(session({ secret: "cats" }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -71,10 +70,10 @@ passport.use(new LocalStrategy(
     User.findOne({ username: username }, function (err, user) {
       if (err) { return done(err); }
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        return done(null, false, { message: "Incorrect username." });
       }
       if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+        return done(null, false, { message: "Incorrect password." });
       }
       return done(null, user);
     });
