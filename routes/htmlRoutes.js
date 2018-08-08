@@ -16,14 +16,20 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
   app.get("/members", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+    db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
+      res.render("premium", {
+        msg: "Welcome, exalted ones",
+        examples: dbExamples
+      });
+    });
+    // res.sendFile(path.join(__dirname, "../public/members.html"));
   });
   app.get("/memberss", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
   // Load index page
   app.get("/", function(req, res) {
-    db.Idea.findAll({}).then(function(dbExamples) {
+    db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
       res.render("index", {
         msg: "Rise and shine, boot campers",
         examples: dbExamples
@@ -33,7 +39,7 @@ module.exports = function(app) {
 
   // Load example page and pass in an example by id
   app.get("/ideas/:id", function(req, res) {
-    db.Idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+    db.idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
       res.render("example", {
         example: dbExample
       });

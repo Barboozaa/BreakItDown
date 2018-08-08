@@ -11,14 +11,24 @@
         </p>
         <h3>Project Ideas</h3>
         <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
+          {{#each examples}}{{#unless this.members_only}}
+          <li style="line-height:1.5" data-id="{{this.id}}" class="list-group-item">
             <div>
               <a href="example/{{this.id}}">{{this.title}}</a>
-              <span style="font-size:12px"> {{this.description}} {{this.tech_used}}</span>
+              <br>
+              <span style="font-size:12px"> {{this.description}}<br> <b>Technologies used:</b> {{this.tech_used}}
+                <div>
+                  <b>User Stories:</b>
+                  {{#each userstories}}
+                  <ul>
+                    <li>{{story}}</li>
+                  </ul>
+                  {{/each}}
+                </div>
+              </span>
             </div>
           </li>
-          {{/each}}
+          {{/unless}}{{/each}}
         </ul>
       </div>
     </div>
