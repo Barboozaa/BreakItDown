@@ -7,7 +7,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.idea.findAll({}).then(function(dbExamples) {
+    db.Idea.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Rise and shine, boot campers",
         examples: dbExamples
@@ -17,7 +17,7 @@ module.exports = function(app) {
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
-    db.idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+    db.Idea.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
       res.render("example", {
         example: dbExample
       });
