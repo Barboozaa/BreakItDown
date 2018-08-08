@@ -13,17 +13,23 @@ module.exports = function (app) {
     if (req.user) {
       res.redirect("/members");
     }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
+    res.sendFile(path.join(__dirname, "../public/html/signup.html"));
   });
-  app.get("/members", isAuthenticated, function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+  app.get("/members", isAuthenticated, function(req, res) {
+    db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
+      res.render("premium", {
+        msg: "Welcome, exalted ones",
+        examples: dbExamples
+      });
+    });
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
-  app.get("/memberss", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+  app.get("/memberss", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
   // Load index page
-  app.get("/", function (req, res) {
-    db.idea.findAll({}).then(function (dbExamples) {
+  app.get("/", function(req, res) {
+    db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
       res.render("index", {
         msg: "Rise and shine, boot campers",
         examples: dbExamples
@@ -50,6 +56,7 @@ module.exports = function (app) {
 
     // res.render("login");
   });
+
 
   app.get("/auth/facebook", passport.authenticate("facebook"));
   app.get("/auth/facebook/callback",

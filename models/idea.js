@@ -8,6 +8,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    tech_used: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    members_only: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    },
     rating: {
       type: DataTypes.FLOAT,
       allowNull: false

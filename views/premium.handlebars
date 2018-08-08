@@ -1,21 +1,18 @@
-<nav class="#ffff00 yellow accent-2">
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo center">Break It Down</a>     
-      <ul class="left hide-on-med-and-down">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/submit">Submit</a></li>
-        <li><a href="/login">Login</a></li> 
-      </ul> 
-   </div>
-  </nav>
 <div id="home">
   <div class="container">
     <div class="row">
-      <div class="col-10 offset-1">
-        <h3 class="center-align"><i class="small material-icons">lightbulb_outline</i>{{msg}}</h3>
-        <h5>Project Ideas</h5>
+      <div class="col-8 offset-2">
+        <a href="/logout">Logout</a>
+        <br>
+        <h1>{{msg}}</h1>
+        <p>
+          You are viewing the top-quality content we can provide. The below projects will have the highest value for the time and payoff. Some of these ideas will knock the socks off your fellow cohort classmates. Some of them will take an hour or two to implement, but appear as though you pulled two straight all-nighters.
+        </p><p>
+          Thank you for supporting us. Wyatt, Brett, Brad, Daniel, and Dhrumil are using your generosity to further our personal and professional development. Please let us know if you have any suggestions or successes with these great project ideas.
+        </p>
+        <h3>Project Ideas</h3>
         <ul id="example-list" class="list-group">
-          {{#each examples}}{{#unless this.members_only}}
+          {{#each examples}}{{#if this.members_only}}
           <li style="line-height:1.5" data-id="{{this.id}}" class="list-group-item">
             <div>
               <a href="example/{{this.id}}">{{this.title}}</a>
@@ -31,9 +28,8 @@
                 </div>
               </span>
             </div>
-
           </li>
-          {{/unless}}{{/each}}
+          {{/if}}{{/each}}
         </ul>
       </div>
     </div>
