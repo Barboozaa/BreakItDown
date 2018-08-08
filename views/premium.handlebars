@@ -1,0 +1,41 @@
+<div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <a href="/logout">Logout</a>
+        <br>
+        <h1>{{msg}}</h1>
+        <p>
+          You are viewing the top-quality content we can provide. The below projects will have the highest value for the time and payoff. Some of these ideas will knock the socks off your fellow cohort classmates. Some of them will take an hour or two to implement, but appear as though you pulled two straight all-nighters.
+        </p><p>
+          Thank you for supporting us. Wyatt, Brett, Brad, Daniel, and Dhrumil are using your generosity to further our personal and professional development. Please let us know if you have any suggestions or successes with these great project ideas.
+        </p>
+        <h3>Project Ideas</h3>
+        <ul id="example-list" class="list-group">
+          {{#each examples}}{{#if this.members_only}}
+          <li style="line-height:1.5" data-id="{{this.id}}" class="list-group-item">
+            <div>
+              <a href="example/{{this.id}}">{{this.title}}</a>
+              <br>
+              <span style="font-size:12px"> {{this.description}}<br> <b>Technologies used:</b> {{this.tech_used}}
+                <div>
+                  <b>User Stories:</b>
+                  {{#each userstories}}
+                  <ul>
+                    <li>{{story}}</li>
+                  </ul>
+                  {{/each}}
+                </div>
+              </span>
+            </div>
+          </li>
+          {{/if}}{{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="/js/index.js"></script>
