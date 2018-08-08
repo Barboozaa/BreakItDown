@@ -6,14 +6,13 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var isAuthenticated = require("../config/isAuthenticated");
 
-
 module.exports = function(app) {
   app.get("/signup", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
       res.redirect("/members");
     }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
+    res.sendFile(path.join(__dirname, "../public/html/signup.html"));
   });
   app.get("/members", isAuthenticated, function(req, res) {
     db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
@@ -22,10 +21,10 @@ module.exports = function(app) {
         examples: dbExamples
       });
     });
-    // res.sendFile(path.join(__dirname, "../public/members.html"));
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
   app.get("/memberss", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+    res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
   // Load index page
   app.get("/", function(req, res) {
@@ -51,11 +50,15 @@ module.exports = function(app) {
     res.render("submitIdeas");
   });
 
- app.get("/login", function(req, res) {
-  res.sendFile(path.join(__dirname, "../public/login.html"));
+  app.get("/login", function(req, res) {
+    // res.render("login");
+    res.sendFile(path.join(__dirname, "../public/html/login.html"));
+  });
 
-  // res.render("login");
-});
+  app.get("/signup", function(req, res) {
+    // res.render("signup");
+    res.sendFile(path.join(__dirname, "../public/html/signup.html"));
+  });
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
@@ -65,6 +68,7 @@ app.get('/auth/facebook/callback',
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
 
   app.get("/auth/facebook", passport.authenticate("facebook"));
 
