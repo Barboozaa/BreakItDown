@@ -15,6 +15,12 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/html/signup.html"));
   });
   app.get("/members", isAuthenticated, function(req, res) {
+    db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
+      res.render("premium", {
+        msg: "Welcome, exalted ones",
+        examples: dbExamples
+      });
+    });
     res.sendFile(path.join(__dirname, "../public/html/members.html"));
   });
   app.get("/memberss", function(req, res) {
@@ -22,7 +28,7 @@ module.exports = function(app) {
   });
   // Load index page
   app.get("/", function(req, res) {
-    db.idea.findAll({}).then(function(dbExamples) {
+    db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
       res.render("index", {
         msg: "Rise and shine, boot campers",
         examples: dbExamples

@@ -65,3 +65,4 @@ INSERT INTO breakdown_db.ideas (title, description, rating) VALUES
 ,('Career suggester','Based on preferences, etc.',2)
 ,('departure email template', 'retirement, vacation, suicide, etc.',3)
 ,('cat battles','https://medium.freecodecamp.org/6-absurd-ideas-for-building-your-first-web-application-24afca35e519#b27b',4)
+,('Food Points','Tracked acrossed',3)
