@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Idea = sequelize.define("Idea", {
+  var Idea = sequelize.define("idea", {
     title: {
       type: DataTypes.STRING,
       allowNull: false
@@ -13,5 +13,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   });
+
+  Idea.associate = function(models) {
+    models.idea.hasMany(models.userstory, {
+      onDelete: "cascade"
+    });
+  };
+
   return Idea;
 };

@@ -1,10 +1,26 @@
 var db = require("../models");
 l = console.log; //simpler logging
 var passport = require("passport");
+var path = require("path")
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var isAuthenticated = require("../config/isAuthenticated");
+
 
 module.exports = function(app) {
+  app.get("/signup", function(req, res) {
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      res.redirect("/members");
+    }
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+  });
+  app.get("/members", isAuthenticated, function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/members.html"));
+  });
+  app.get("/memberss", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/members.html"));
+  });
   // Load index page
   app.get("/", function(req, res) {
     db.idea.findAll({}).then(function(dbExamples) {
@@ -30,7 +46,9 @@ module.exports = function(app) {
   });
 
  app.get("/login", function(req, res) {
-  res.render("login");
+  res.sendFile(path.join(__dirname, "../public/login.html"));
+
+  // res.render("login");
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
@@ -49,16 +67,16 @@ app.get('/auth/google',
     res.redirect('/');
   });
 
- app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true,
-  successFlash: 'Welcome!' }),
-  function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    res.redirect('/users/' + req.user.username);
-  });
+//  app.post('/login',
+//   passport.authenticate('local', { successRedirect: '/',
+//   failureRedirect: '/login',
+//   failureFlash: true,
+//   successFlash: 'Welcome!' }),
+//   function(req, res) {
+//     // If this function gets called, authentication was successful.
+//     // `req.user` contains the authenticated user.
+//     res.redirect('/users/' + req.user.username);
+//   });
 
   
 
