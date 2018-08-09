@@ -68,10 +68,10 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var example = {
-    text: $title.val().trim(),
+    title: $title.val().trim(),
     description: $description.val().trim(),
-    technologyUsed: $technologyUsed.val().trim(),
-    usersStory: $usersStory.val().trim(),
+    tech_used: $technologyUsed.val().trim(),
+    story: $usersStory.val().trim(),
     link: $link.val().trim(),
   };
 

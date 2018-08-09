@@ -14,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     members_only: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false 
     },
     rating: {
       type: DataTypes.FLOAT,
