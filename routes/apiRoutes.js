@@ -10,8 +10,8 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.idea.create(req.body).then(function(dbExample) {
+  app.post("/api/ideas", function(req, res) {
+    db.idea.create(req.body,{include:[db.userstory]}).then(function(dbExample) {
       res.json(dbExample);
     });
   });
@@ -76,5 +76,7 @@ module.exports = function(app) {
       });
     }
   });
+
+
 
 };

@@ -27,10 +27,9 @@ var handleFormSubmit = function(event) {
   var example = {
     title: $title.val().trim(),
     description: $description.val().trim(),
-    technologyUsed: $technologyUsed.val().trim(),
-    usersStory: $usersStory.val().trim(),
+    tech_used: $technologyUsed.val().trim(),
+    story: $usersStory.val().trim(),
     rating: $rating.val().trim(),
-    link: $link.val().trim()
   };
   console.log(example);
   if (!(example.title && example.description)) {
