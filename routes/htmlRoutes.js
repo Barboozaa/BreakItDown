@@ -28,7 +28,7 @@ module.exports = function (app) {
   app.get("/", function(req, res) {
     db.idea.findAll({include:[db.userstory]}).then(function(dbExamples) {
       res.render("index", {
-        msg: "Rise and shine, boot campers",
+        msg: "Rise and Shine, Boot Campers!",
         examples: dbExamples
       });
     });
